@@ -1,5 +1,4 @@
 ---
-version: "2.4"
 services:
   gluetun:
     image: qmcgaw/gluetun
@@ -42,7 +41,7 @@ services:
       - apparmor=unconfined
     depends_on:
       - gluetun
-    restart: always
+    restart: unless-stopped
   transmission-series:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission-series
@@ -66,4 +65,4 @@ services:
       - apparmor=unconfined
     depends_on:
       - gluetun
-    restart: always
+    restart: unless-stopped
