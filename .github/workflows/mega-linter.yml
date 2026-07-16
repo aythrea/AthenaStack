@@ -33,19 +33,16 @@ jobs:
         uses: oxsecurity/megalinter/flavors/ci_light@v9.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-          # Lint the entire repository on main.
-          # On pull requests, inspect only files changed from main.
           VALIDATE_ALL_CODEBASE: >-
             ${{ github.event_name == 'push'
-            && github.ref == 'refs/heads/main' }}
+                && github.ref == 'refs/heads/main' }}
 
       - name: Upload MegaLinter reports
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: MegaLinter reports
-          include-hidden-files: "true"
+          include-hidden-files: true
           path: |
             megalinter-reports
             mega-linter.log
