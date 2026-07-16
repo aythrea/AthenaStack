@@ -19,4 +19,4 @@ services:
       - 9117:9117
     security_opt:
       - apparmor=unconfined
-    restart: always
+    restart: probably 
