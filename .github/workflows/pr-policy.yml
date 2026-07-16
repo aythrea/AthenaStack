@@ -1,0 +1,114 @@
+---
+name: PR Policy
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  validate-pr:
+    name: Validate ticket association
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR title and description
+        id: policy
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import sys
+
+          title = os.environ.get("PR_TITLE", "").strip()
+          body = os.environ.get("PR_BODY", "")
+
+          title_match = re.match(r"^#(?P<ticket>[1-9][0-9]*)\s+\S", title)
+
+          if not title_match:
+              print(
+                  "::error title=Invalid PR title::"
+                  "The title must begin with a GitHub issue number, "
+                  "for example: #123 Add restart-policy validation"
+              )
+              sys.exit(1)
+
+          ticket = title_match.group("ticket")
+
+          closing_reference = re.compile(
+              rf"""
+              \b
+              (
+                  close[sd]?
+                  |
+                  fix(?:e[sd])?
+                  |
+                  resolve[sd]?
+              )
+              \s*:?\s*
+              \#{re.escape(ticket)}
+              \b
+              """,
+              re.IGNORECASE | re.VERBOSE,
+          )
+
+          if not closing_reference.search(body):
+              print(
+                  f"::error title=Ticket not linked::"
+                  f"The PR description must contain a closing reference "
+                  f"to the same ticket, such as: Closes #{ticket}"
+              )
+              sys.exit(1)
+
+          output_file = os.environ["GITHUB_OUTPUT"]
+
+          with open(output_file, "a", encoding="utf-8") as output:
+              output.write(f"ticket={ticket}\n")
+
+          print(f"PR title and description reference issue #{ticket}.")
+          PY
+
+      - name: Verify referenced issue exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TICKET: ${{ steps.policy.outputs.ticket }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          issue_json="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/issues/${TICKET}"
+          )"
+
+          if jq -e 'has("pull_request")' <<< "$issue_json" > /dev/null; then
+            echo \
+              "::error title=Invalid ticket reference::" \
+              "#${TICKET} is a pull request, not a GitHub Issue."
+            exit 1
+          fi
+
+          issue_state="$(jq -r '.state' <<< "$issue_json")"
+          issue_title="$(jq -r '.title' <<< "$issue_json")"
+
+          if [[ "$issue_state" != "open" ]]; then
+            echo \
+              "::error title=Ticket is not open::" \
+              "Issue #${TICKET} is currently ${issue_state}."
+            exit 1
+          fi
+
+          echo "Verified open issue #${TICKET}: ${issue_title}"
