@@ -12,11 +12,10 @@ services:
       - TZ=America/Chicago
       - AUTO_UPDATE=true # optional
       - RUN_OPTS= # optional
-    fake_property: broken
     volumes:
       - /athenamedia/Appdata/Jackett:/config
     ports:
       - 9117:9117
     security_opt:
       - apparmor=unconfined
-    restart: probably 
+    restart: always 
