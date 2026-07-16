@@ -1,5 +1,4 @@
 ---
-version: "2.1"
 services:
   jackett:
     image: lscr.io/linuxserver/jackett
@@ -13,6 +12,7 @@ services:
       - TZ=America/Chicago
       - AUTO_UPDATE=true # optional
       - RUN_OPTS= # optional
+    fake_property: broken
     volumes:
       - /athenamedia/Appdata/Jackett:/config
     ports:
