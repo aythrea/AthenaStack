@@ -6,16 +6,16 @@ on:
     branches:
       - main
     paths:
-      - "**/*.yml"
-      - "**/*.yaml"
+      - "**.yml"
+      - "**.yaml"
       - ".github/workflows/compose-validation.yml"
 
   push:
     branches:
       - main
     paths:
-      - "**/*.yml"
-      - "**/*.yaml"
+      - "**.yml"
+      - "**.yaml"
       - ".github/workflows/compose-validation.yml"
 
   workflow_dispatch:
