@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
+    image: lscr.io/linuxserver/bazarr
     container_name: bazarr
     environment:
       - PUID=1000
@@ -79,7 +79,7 @@ services:
       # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
+    image: lscr.io/linuxserver/prowlarr
     container_name: prowlarr
     environment:
       - PUID=1000
