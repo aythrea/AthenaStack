@@ -16,7 +16,11 @@ services:
       - 6767:6767
     restart: always
     security_opt:
+      # AppArmor confinement previously caused application failures in this stack.
+      # This service remains unconfined until the required permissions and profile
+      # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
+      
   lidarr:
     image: ghcr.io/linuxserver/lidarr
     container_name: lidarr
@@ -32,6 +36,9 @@ services:
       - 8686:8686
     restart: always
     security_opt:
+      # AppArmor confinement previously caused application failures in this stack.
+      # This service remains unconfined until the required permissions and profile
+      # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
   radarr:
     image: ghcr.io/linuxserver/radarr
@@ -48,6 +55,9 @@ services:
       - 7878:7878
     restart: always
     security_opt:
+      # AppArmor confinement previously caused application failures in this stack.
+      # This service remains unconfined until the required permissions and profile
+      # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
   sonarr:
     image: ghcr.io/linuxserver/sonarr
@@ -64,6 +74,9 @@ services:
       - 8989:8989
     restart: always
     security_opt:
+      # AppArmor confinement previously caused application failures in this stack.
+      # This service remains unconfined until the required permissions and profile
+      # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -78,4 +91,7 @@ services:
       - 9696:9696
     restart: always
     security_opt:
+      # AppArmor confinement previously caused application failures in this stack.
+      # This service remains unconfined until the required permissions and profile
+      # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
