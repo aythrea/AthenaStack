@@ -64,3 +64,20 @@ jobs:
             echo "Validation passed: ${compose_file}"
             echo "::endgroup::"
           done
+  validate-policy:
+    name: Validate AthenaStack policy
+    needs:
+      - validate-compose
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Validate AthenaStack policies
+        run: python3 .github/scripts/validate-compose-policy.py
