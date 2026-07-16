@@ -1,0 +1,66 @@
+---
+name: Docker Compose validation
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.yml"
+      - "**/*.yaml"
+      - ".github/workflows/compose-validation.yml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.yml"
+      - "**/*.yaml"
+      - ".github/workflows/compose-validation.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compose-validation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-compose:
+    name: Validate Compose files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Show Docker Compose version
+        run: docker compose version
+
+      - name: Validate Compose files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          compose_files=(
+            "athenastack-compose.yml"
+            "glances-stack.yml"
+            "jackett.yml"
+            "plex-stack.yml"
+            "transfer.yml"
+          )
+
+          for compose_file in "${compose_files[@]}"; do
+            echo "::group::Validating ${compose_file}"
+            docker compose \
+              --project-name "validation" \
+              --file "${compose_file}" \
+              config \
+              --quiet
+            echo "Validation passed: ${compose_file}"
+            echo "::endgroup::"
+          done
