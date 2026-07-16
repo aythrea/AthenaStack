@@ -55,13 +55,13 @@ services:
       - TZ=America/Chicago
       - TRANSMISSION_WEB_HOME=/config/webui/flood/
     ports:
-       - 9092:9091
-       - 51414:51413
-       - 51414:51413/udp   
+      - 9092:9091
+      - 51414:51413
+      - 51414:51413/udp
     volumes:
-       - /athenamedia/Appdata/Transmission:/config
-     # - /athenamedia/Appdata/Transmission:/downloads
-     # - /athenamedia/Appdata/Transmission/watch:/watch
+      - /athenamedia/Appdata/Transmission:/config
+      # - /athenamedia/Appdata/Transmission:/downloads
+      # - /athenamedia/Appdata/Transmission/watch:/watch
     security_opt:
       - apparmor=unconfined
     depends_on:
