@@ -20,7 +20,7 @@ services:
       # This service remains unconfined until the required permissions and profile
       # behavior are fully understood and a tested custom profile is available.
       - apparmor=unconfined
-      
+
   lidarr:
     image: ghcr.io/linuxserver/lidarr
     container_name: lidarr
