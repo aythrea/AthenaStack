@@ -46,3 +46,22 @@ Do not commit credentials.
 4. Report
 5. Correct drift
 6. Enforce
+
+## Platform Environment
+
+Common, non-secret platform values should be defined once by the deployment
+environment and referenced by Compose definitions where supported.
+
+The current shared values are:
+
+- `TZ`
+- `PUID`
+- `PGID`
+
+### Timezone
+
+AthenaStack uses `America/Chicago` as its platform timezone.
+
+Services should reference the shared `TZ` value only when the image or
+application supports configurable timezone behavior. `TZ` affects local-time
+presentation; it does not synchronize the container clock.
