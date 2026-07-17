@@ -10,12 +10,14 @@ AthenaStack defines containerized applications deployed with Docker and Portaine
 - CI validates repository content; deployment automation comes later.
 
 ## Restart Policies
+CI validates restart policies that are explicitly declared. It does not yet
+require every service to declare a restart policy.
 Declared restart policies must be one of:
-- no
-- always
-- unless-stopped
-- on-failure
-- on-failure:<retry-count>
+- `no`
+- `always`
+- `unless-stopped`
+- `on-failure`
+- `on-failure:<retry-count>`
 
 ## LinuxServer Containers
 Normally define:
