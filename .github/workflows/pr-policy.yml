@@ -112,3 +112,4 @@ jobs:
           fi
 
           echo "Verified open issue #${TICKET}: ${issue_title}"
+          
