@@ -13,7 +13,7 @@
 - Docker Compose Validation
 - AthenaStack Policy Validation
 
-This governance exists to practice professional workflows.
+“This governance provides change traceability, protects the default branch, and creates a professional CI/CD learning environment.”
 ## Repository Policy
 
 - Direct changes to `main` are prohibited.
