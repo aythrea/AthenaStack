@@ -28,7 +28,7 @@ Merge into main
 
 ---
 
-# Step 1: Create a GitHub Issue
+## Step 1: Create a GitHub Issue
 
 Before creating a branch or editing files, create an Issue describing the work.
 
@@ -62,7 +62,7 @@ The issue must remain **open** until the pull request is merged.
 
 ---
 
-# Step 2: Create a Working Branch
+## Step 2: Create a Working Branch
 
 Never make the change directly on `main`.
 
@@ -82,7 +82,7 @@ Example:
 
 The branch-name format is currently a convention rather than an automated requirement, but using it makes the work easy to identify.
 
-## Command-line example
+### Command-line example
 
 ```bash
 git switch main
@@ -116,7 +116,7 @@ main
 
 ---
 
-# Step 3: Make the Change
+## Step 3: Make the Change
 
 Edit only the files needed for the issue.
 
@@ -146,7 +146,7 @@ Confirm that:
 
 ---
 
-# Step 4: Commit the Change
+## Step 4: Commit the Change
 
 Stage the intended files:
 
@@ -179,7 +179,7 @@ fix
 
 ---
 
-# Step 5: Push the Branch
+## Step 5: Push the Branch
 
 Push the branch to GitHub:
 
@@ -195,7 +195,7 @@ git push
 
 ---
 
-# Step 6: Open the Pull Request
+## Step 6: Open the Pull Request
 
 Open a pull request from the working branch into `main`.
 
@@ -218,7 +218,7 @@ The intended direction is:
 
 ---
 
-# Step 7: Format the Pull-Request Title
+## Step 7: Format the Pull-Request Title
 
 The title must begin with the issue number.
 
@@ -273,7 +273,7 @@ There must be:
 
 ---
 
-# Step 8: Link the Issue in the PR Description
+## Step 8: Link the Issue in the PR Description
 
 Under the **Ticket** heading, enter:
 
@@ -336,7 +336,7 @@ The issue referenced in the title and body must match.
 
 ---
 
-# Step 9: Create the Pull Request
+## Step 9: Create the Pull Request
 
 Before selecting **Create pull request**, verify:
 
@@ -354,7 +354,7 @@ Then create the pull request.
 
 ---
 
-# Step 10: Read the Automated Checks
+## Step 10: Read the Automated Checks
 
 The PR Policy workflow checks:
 
@@ -374,13 +374,13 @@ Other workflows may also check:
 
 ---
 
-# Correcting a Failed PR Policy Check
+## Correcting a Failed PR Policy Check
 
 A failed policy check does not usually require a new branch or PR.
 
 Open the PR and read the failed check.
 
-## Failure: Invalid PR title
+### Failure: Invalid PR title
 
 Example error:
 
@@ -408,7 +408,7 @@ The PR Policy workflow should run again automatically.
 
 ---
 
-## Failure: Ticket not linked
+### Failure: Ticket not linked
 
 Example error:
 
@@ -428,7 +428,7 @@ Save the description. The policy check should run again.
 
 ---
 
-## Failure: Referenced issue does not exist
+### Failure: Referenced issue does not exist
 
 The issue number is incorrect or was never created.
 
@@ -453,7 +453,7 @@ Closes #12
 
 ---
 
-## Failure: Ticket is not open
+### Failure: Ticket is not open
 
 The issue was closed before the PR was merged.
 
@@ -463,7 +463,7 @@ The issue should remain open while the PR is under review. The `Closes #12` refe
 
 ---
 
-## Failure: Number points to a pull request
+### Failure: Number points to a pull request
 
 GitHub Issues and pull requests share the same repository number sequence.
 
@@ -473,7 +473,7 @@ Create or locate the correct open Issue, then update the PR title and body with 
 
 ---
 
-# Updating the Pull Request
+## Updating the Pull Request
 
 Additional commits can be made on the same branch:
 
@@ -489,7 +489,7 @@ Do not create a new pull request for every correction.
 
 ---
 
-# Final Merge Checklist
+## Final Merge Checklist
 
 Merge only when:
 
@@ -517,33 +517,33 @@ git branch -d 12-platform-documentation
 
 ---
 
-# Complete Example
+## Complete Example
 
-## Issue
+### Issue
 
 ```text
 #12 Document AthenaStack standards
 ```
 
-## Branch
+### Branch
 
 ```text
 12-platform-documentation
 ```
 
-## Commit
+### Commit
 
 ```text
 Add AthenaStack platform documentation
 ```
 
-## PR title
+### PR title
 
 ```text
 #12 Add AthenaStack platform documentation
 ```
 
-## PR body
+### PR body
 
 ```markdown
 ## Ticket
@@ -564,7 +564,7 @@ Adds the AthenaStack platform standards and governance documentation.
 Documentation-only change. No production impact.
 ```
 
-## Result
+### Result
 
 ```text
 PR Policy: Passed
@@ -572,7 +572,7 @@ PR Policy: Passed
 
 ---
 
-# One-Line Memory Aid
+## One-Line Memory Aid
 
 ```text
 Issue #12 → branch 12-description → PR title #12 Description → body Closes #12
