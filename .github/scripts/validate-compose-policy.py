@@ -71,9 +71,11 @@ def validate_file(filename: str) -> list[str]:
     for service_name, service in services.items():
         restart_policy = service.get("restart")
 
-        # Absence is currently permitted. This policy only validates values
-        # that the service explicitly declares.
         if restart_policy is None:
+            errors.append(
+                f"{filename}: service '{service_name}' does not declare "
+                "a restart policy"
+            )
             continue
 
         if not valid_restart_policy(restart_policy):
@@ -86,6 +88,7 @@ def validate_file(filename: str) -> list[str]:
 
 
 def main() -> int:
+    """Validate all managed Compose files."""
     errors: list[str] = []
 
     for filename in COMPOSE_FILES:
@@ -96,7 +99,9 @@ def main() -> int:
         try:
             errors.extend(validate_file(filename))
         except subprocess.CalledProcessError as exc:
-            print(exc.stderr, file=sys.stderr)
+            if exc.stderr:
+                print(exc.stderr, file=sys.stderr)
+
             errors.append(
                 f"{filename}: Docker Compose could not render the file"
             )
@@ -113,7 +118,7 @@ def main() -> int:
 
         return 1
 
-    print("All declared restart policies are valid.")
+    print("All services declare valid restart policies.")
     return 0
 
 
