@@ -96,4 +96,3 @@ jobs:
         with:
           name: AthenaStack policy audit
           path: compose-policy-audit.md
-          
