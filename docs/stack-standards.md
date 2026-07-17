@@ -1,7 +1,11 @@
 # AthenaStack Application Standards
 
 ## Purpose
-AthenaStack defines containerized applications deployed with Docker and Portainer. This document defines platform standards independently of CI implementation.
+AthenaStack defines containerized applications running on an OpenMediaVault
+Docker host. Portainer is the current deployment and management interface.
+
+The platform may move toward Compose-native deployment as the CI/CD process
+matures. Such a migration will be treated as a separate operational change.
 
 ## Deployment Model
 - Docker Compose defines independently deployable Portainer stacks.
