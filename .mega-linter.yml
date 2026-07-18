@@ -13,6 +13,7 @@ ENABLE_LINTERS:
   - ACTION_ACTIONLINT
   - MARKDOWN_MARKDOWNLINT
   - YAML_YAMLLINT
+  - PYTHON_PYLINT
 
 # Fail immediately if the selected flavor does not contain one of the
 # linters listed above.

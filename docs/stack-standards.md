@@ -18,17 +18,21 @@ matures. Such a migration will be treated as a separate operational change.
 
 ## Restart Policies
 
-CI validates restart policies that are explicitly declared. It does not yet
-require every service to declare a restart policy.
+Every managed service must explicitly declare a restart policy.
 
-Declared restart policies must be one of:
+AthenaStack does not require one universal policy because restart behavior
+depends on the operational role and failure characteristics of the service.
 
-* `no`;
-* `always`;
-* `unless-stopped`;
-* `on-failure`;
-* `on-failure:<retry-count>`.
+Allowed values are:
 
+- `no`
+- `always`
+- `unless-stopped`
+- `on-failure`
+- `on-failure:<retry-count>`
+
+Using `no` is acceptable when automatic restart could mask a persistent fault
+or create an undesirable restart loop.
 ## Platform Environment
 
 Common, non-secret platform values should be defined once by the deployment
