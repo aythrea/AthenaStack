@@ -15,8 +15,6 @@
 * explicit inventory of managed Compose files;
 * proven failure path for unknown Compose properties.
 
-## In Progress
-
 ### Phase 3: Platform Policy
 
 * restart-policy validation;
@@ -31,9 +29,11 @@
 * issue-linked pull requests established;
 * main-branch ruleset pending administrative configuration.
 
-## Planned
+## In Progress
 
 ### Phase 4: Release Engineering
+
+## Planned
 
 Define how validated changes are packaged, reviewed, approved, and promoted.
 
