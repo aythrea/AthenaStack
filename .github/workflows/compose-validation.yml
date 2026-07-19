@@ -79,16 +79,30 @@ jobs:
       - name: Show Python version
         run: python3 --version
 
-      - name: Validate AthenaStack policies
-        run: python3 .github/scripts/validate-compose-policy.py
       - name: Audit application conventions
+        shell: bash
         run: |
+          set -euo pipefail
+
           python3 .github/scripts/audit-compose-policy.py \
             | tee compose-policy-audit.md
 
       - name: Add audit to workflow summary
         if: always()
-        run: cat compose-policy-audit.md >> "$GITHUB_STEP_SUMMARY"
+        shell: bash
+        run: |
+          if [[ -f compose-policy-audit.md ]]; then
+            cat compose-policy-audit.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "# AthenaStack Policy Audit"
+              echo
+              echo "The policy audit report was not generated."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Validate AthenaStack policies
+        run: python3 .github/scripts/validate-compose-policy.py
 
       - name: Upload policy audit
         if: always()
@@ -96,3 +110,4 @@ jobs:
         with:
           name: AthenaStack policy audit
           path: compose-policy-audit.md
+          if-no-files-found: warn
