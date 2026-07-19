@@ -109,7 +109,7 @@ def main() -> int:
             errors.append(
                 f"{filename}: Compose produced invalid JSON: {exc}"
             )
-
+unused_value = 10
     if errors:
         print("AthenaStack policy validation failed:", file=sys.stderr)
 
