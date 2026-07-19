@@ -10,6 +10,6 @@ services:
       - /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock
     environment:
       - "GLANCES_OPT=-w"
-    restart: probably
+    restart: unless-stopped
     security_opt:
       - apparmor=unconfined
