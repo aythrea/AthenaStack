@@ -21,7 +21,7 @@ services:
       - 51414:51414/udp
     security_opt:
       - apparmor=unconfined
-    restart: always
+    restart: unless-stopped
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
